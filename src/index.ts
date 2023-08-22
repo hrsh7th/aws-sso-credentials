@@ -61,8 +61,10 @@ const credentials = trying<Credentials>(() => {
   exit('Failed to call/parse `aws sso get-role-credentials ...`', e);
 });
 
+const region = ssoSessionCache.region ?? profileConfig.region ?? 'ap-northeast-1';
+
 console.log(`[${profile}]
-region=ap-northeast-1
+region = ${region}
 aws_access_key_id = ${credentials.roleCredentials.accessKeyId}
 aws_secret_access_key = ${credentials.roleCredentials.secretAccessKey}
 aws_session_token = ${credentials.roleCredentials.sessionToken}`);
